@@ -1,0 +1,281 @@
+body {
+  background-color: #33d;
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  min-height: 100%;
+  margin: 0;
+}
+
+.menuContainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr 1fr 2fr;
+  column-gap: 10px;
+  row-gap: 10px;
+  align-items: center;
+}
+
+.menuContainer__title {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.menuContainer__subtitle {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row: 2;
+  justify-self: center;
+}
+
+.menuContainer input[type="radio"] {
+  opacity: 0;
+  width: 0;
+  position: fixed;
+}
+
+.menuContainer label {
+  display: inline-block;
+  color: #33d;
+  background-color: rgb(189, 177, 241);
+  padding: 10px 20px;
+  border: 4px solid rgb(48, 31, 143);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.menuContainer input[type="radio"]:checked + label {
+  color: #33d;
+  background-color: #fff;
+  border-color: rgb(48, 31, 143);
+}
+
+.menuContainer input[type="radio"]:focus + label {
+  border: 4px dashed rgb(48, 31, 143);
+}
+
+.menuContainer label:hover {
+  color: #33d;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.menuContainer__players--p1 {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.menuContainer__players--p2 {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.menuContainer__playerType {
+  margin: 0;
+}
+
+.menuContainer__playerType--1h {
+  grid-column: 2;
+  grid-row: 3;
+  justify-self: center;
+}
+
+.menuContainer__playerType--1a {
+  grid-column: 3;
+  grid-row: 3;
+  justify-self: center;
+}
+
+.menuContainer__playerType--2h {
+  grid-column: 2;
+  grid-row: 4;
+  justify-self: center;
+}
+
+.menuContainer__playerType--2a {
+  grid-column: 3;
+  grid-row: 4;
+  justify-self: center;
+}
+
+.menuContainer__start {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row: 5;
+  justify-self: center;
+}
+
+.standardButton {
+  display: inline-block;
+  color: #33d;
+  background-color: rgb(189, 177, 241);
+  padding: 10px 20px;
+  border: 4px solid rgb(48, 31, 143);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.standardButton:hover {
+  color: #33d;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.gameContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 4fr 1fr;
+  column-gap: 10px;
+  row-gap: 10px;
+  align-items: center;
+  justify-items: center;
+}
+
+.gameContainer__playerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(189, 177, 241);
+  padding: 10px;
+  border-radius: 12px;
+  border: 4px solid rgb(48, 31, 143);
+  min-width: 85px;
+}
+
+.gameContainer__playerCardToken {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #33d;
+  border: 2px solid rgb(48, 31, 143);
+  border-radius: 12px;
+  height: 60px;
+  width: 60px;
+}
+
+.gameContainer__playerCardTokenAvatar {
+  border-radius: 22px;
+  height: 40px;
+  width: 40px;
+  border: 2px solid rgb(48, 31, 143);
+}
+
+.gameContainer__playerCardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #33d;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.gameBoard {
+  grid-column: 2;
+  grid-row: 1;
+  background-color: rgb(189, 177, 241);
+  padding: 10px;
+  border-radius: 12px;
+  border: 4px solid rgb(48, 31, 143);
+  border-spacing: 6px;
+}
+
+.gameControls {
+  grid-column: 2;
+  grid-row: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.tableCell {
+  height: 40px;
+  width: 40px;
+  border: 2px solid rgb(48, 31, 143);
+  border-radius: 24px;
+  background-color: #33d;
+  cursor: pointer;
+}
+
+.redPiece {
+  background-color: rgb(255, 60, 60);
+}
+
+.yellowPiece {
+  background-color: rgb(255, 255, 85);
+}
+
+.cellHighlight {
+  background-color: #fff;
+}
+
+.whiteBG {
+  background-color: #fff;
+}
+
+.lilacBG {
+  background-color: rgb(189, 177, 241);
+}
+
+.m0 {
+  margin: 0;
+}
+
+.heavyFont {
+  font-weight: 800;
+}
+
+.whiteFont {
+  color: #fff;
+}
+
+.purpleFont {
+  color: #33d;
+}
+
+@media (max-width: 820px) {
+  .gameContainer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 4fr 2fr 1fr;
+  }
+
+  .gameBoard {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 1;
+  }
+
+  .gameContainer__playerCard {
+    grid-row: 2;
+    width: 60%;
+    justify-self: start;
+  }
+
+  .gameControls {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 3;
+    justify-content: flex-start;
+  }
+
+  .tableCell {
+    height: 26px;
+    width: 26px;
+  }
+}

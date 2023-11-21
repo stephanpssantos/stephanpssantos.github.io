@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <main class="container">
+      <div id="menuContainer" class="menuContainer">
+        <div class="menuContainer__title">
+          <h1 class="m0 whiteFont">Connect 4</h1>
+        </div>
+        <div class="menuContainer__subtitle">
+          <h5 class="m0 whiteFont">Play against a trained machine learning model</h5>
+        </div>
+        <div class="menuContainer__players--p1 whiteFont">Player 1</div>
+        <div class="menuContainer__players--p2 whiteFont">Player 2</div>
+        <input type="radio" id="p1_human" name="p1" value="human" checked class="menuContainer__playerType menuContainer__playerType--1h" />
+        <label for="p1_human" class="menuContainer__playerType--1h">Human</label>
+        <input type="radio" id="p1_ai" name="p1" value="ai" class="menuContainer__playerType menuContainer__playerType--1a"/>
+        <label for="p1_ai" class="menuContainer__playerType--1a">AI</label>
+        <input type="radio" id="p2_human" name="p2" value="human" checked class="menuContainer__playerType menuContainer__playerType--2h" />
+        <label for="p2_human" class="menuContainer__playerType--2h">Human</label>
+        <input type="radio" id="p2_ai" name="p2" value="ai" class="menuContainer__playerType menuContainer__playerType--2a" />
+        <label for="p2_ai" class="menuContainer__playerType--2a">AI</label>
+        <div class="menuContainer__start">
+          <button type="submit" id="gameStart__button" class="standardButton">Start Game</button>
+        </div>
+      </div>
+      <div id="gameContainer" class="gameContainer hidden">
+        <table id="gameBoard" class="gameBoard"></table>
+        <div id="player1Card" class="gameContainer__playerCard whiteBG">
+          <div class="gameContainer__playerCardToken">
+            <div class="gameContainer__playerCardTokenAvatar redPiece"></div>
+          </div>
+          <div class="gameContainer__playerCardInfo">
+            <div>Player 1</div>
+            <div id="player1Status">Your turn</div>
+          </div>
+        </div>
+        <div id="player2Card" class="gameContainer__playerCard">
+          <div class="gameContainer__playerCardToken">
+            <div class="gameContainer__playerCardTokenAvatar yellowPiece"></div>
+          </div>
+          <div class="gameContainer__playerCardInfo">
+            <div>Player 2</div>
+            <div id="player2Status">Waiting</div>
+          </div>
+        </div>
+        <div id="gameControls" class="gameControls">
+          <button type="button" id="newGame" class="standardButton">Restart</button>
+          <button type="button" id="returnToMenu" class="standardButton">Menu</button>
+        </div>
+      </div>
+      <!-- <div id="gameStatus">
+        <div>
+          <span>Status: </span>
+          <span id="gameStatus_status">GAME_MENU</span>
+        </div>
+        <div>
+          <span>Turn: </span>
+          <span id="gameStatus_turn">Player 1</span>
+        </div>
+        <div>
+          <span>Latest Update Type: </span>
+          <span id="gameStatus_updateType"></span>
+        </div>
+      </div> -->
+    </main>
+    <!-- Import TensorFlow.js library -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"
+      type="text/javascript"
+    ></script>
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>

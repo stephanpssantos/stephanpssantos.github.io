@@ -1,0 +1,29 @@
+export const GAME_CONFIG = {
+  BOARD_WIDTH: 7,
+  BOARD_HEIGHT: 6,
+  TURN_LIMIT: 42, // 7 * 6
+};
+
+export const COMMAND = {
+  MENU: "MENU",
+  NEW_GAME: "NEW_GAME",
+  SET_PLAYER_1: "SET_PLAYER_1",
+  SET_PLAYER_2: "SET_PLAYER_2",
+  NEW_MOVE: "NEW_MOVE",
+};
+
+export const UPDATE = {
+  NEW_MOVE: "NEW_MOVE",
+  MOVE_REJECTED: "MOVE_REJECTED",
+  NEW_STATUS: "NEW_STATUS",
+  NEW_BOARD: "NEW_BOARD",
+  INVALID_GAME_STATE: "INVALID_GAME_STATE",
+};
+
+export const GAME_STATUS = {
+  MENU: "MENU",
+  ACTIVE: "ACTIVE",
+  P1WIN: "P1WIN",
+  P2WIN: "P2WIN",
+  DRAW: "DRAW",
+};
