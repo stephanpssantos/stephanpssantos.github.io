@@ -1,7 +1,7 @@
-import { UPDATE, GAME_STATUS } from "../Constants.js";
-import Connect4 from "../Connect4.js";
-import Command from "../models/Command.js";
-import Move from "../models/Move.js";
+import { UPDATE, GAME_STATUS } from "./Constants.js";
+import Connect4 from "./Connect4.js";
+import Command from "./models/Command.js";
+import Move from "./models/Move.js";
 
 const vi = new viewInterface();
 const c4 = new Connect4(vi);
