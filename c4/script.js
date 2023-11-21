@@ -1,7 +1,7 @@
-import { UPDATE, GAME_STATUS } from "./Constants.js";
-import Connect4 from "./Connect4.js";
-import Command from "./models/Command.js";
-import Move from "./models/Move.js";
+import { UPDATE, GAME_STATUS } from "../Constants.js";
+import Connect4 from "../Connect4.js";
+import Command from "../models/Command.js";
+import Move from "../models/Move.js";
 
 const vi = new viewInterface();
 const c4 = new Connect4(vi);
@@ -82,14 +82,15 @@ function buildBoard() {
     for (let c = 0; c < columns; c++) {
       let cell = row.insertCell(c);
       cell.classList.add("tableCell");
-      cell.addEventListener("mouseover", function () {
+      cell.addEventListener("mouseenter", function () {
         onCellHover(c);
       });
-      cell.addEventListener("mouseout", function () {
+      cell.addEventListener("mouseleave", function () {
         onCellHoverOut(c);
       });
       cell.addEventListener("click", function () {
         onCellClick(c);
+        onCellHoverOut(c);
       });
     }
   }

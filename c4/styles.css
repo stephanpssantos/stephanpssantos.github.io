@@ -12,7 +12,7 @@ body {
   justify-content: center;
   height: 100vh;
   min-height: 100%;
-  margin: 0;
+  padding: 0 20px;
 }
 
 .menuContainer {
@@ -125,6 +125,7 @@ body {
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 800;
+  font-family: "Nunito", sans-serif;
 }
 
 .standardButton:hover {
