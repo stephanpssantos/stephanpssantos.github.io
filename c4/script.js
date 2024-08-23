@@ -102,7 +102,7 @@ function onCellHover(column) {
   const rows = board.length;
 
   for (let r = rows - 1; r >= 0; r--) {
-    if (board[r][column] === 0) {
+    if (board[r][column][0] === 0 && board[r][column][1] === 0) {
       const cell = table.rows[r].cells[column];
       cell.classList.add("cellHighlight");
     }
@@ -115,7 +115,7 @@ function onCellHoverOut(column) {
   const rows = board.length;
 
   for (let r = rows - 1; r >= 0; r--) {
-    if (board[r][column] === 0) {
+    if (board[r][column][0] === 0 && board[r][column][1] === 0) {
       const cell = table.rows[r].cells[column];
       cell.classList.remove("cellHighlight");
     }
@@ -128,7 +128,7 @@ function onCellClick(column) {
   let row = -1;
 
   for (let r = rows - 1; r >= 0; r--) {
-    if (board[r][column] === 0) {
+    if (board[r][column][0] === 0 && board[r][column][1] === 0) {
       row = r;
       break;
     }
@@ -229,6 +229,10 @@ viewInterface.prototype.updateInfoDisplay = function (update) {
       player2Status.innerHTML = "Draw";
       player1Card.classList.remove("whiteBG");
       player2Card.classList.remove("whiteBG");
+    }
+    else if (update.newStatus === GAME_STATUS.MENU) {
+      docBody.classList.remove("redPiece");
+      docBody.classList.remove("yellowPiece");
     }
   }
 };
