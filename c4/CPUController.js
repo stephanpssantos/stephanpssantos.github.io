@@ -14,12 +14,13 @@ class CPUController {
         this._loadAndGo();
     }
     else {
-        let board = this.board.getBoard();
+        let board;
 
-        if (!this.isPlayer1) {
-          let boardCopy = this._copyBoard(board);
-          this._invertBoard(boardCopy);
-          board = boardCopy;
+        if (this.isPlayer1) {
+          board = this.board.getBoard();
+        }
+        else {
+          board = this.board.getInvertedBoard();
         }
 
         const mask = this._getLegalMoves(board);
@@ -65,17 +66,8 @@ class CPUController {
   }
 
   async _loadModel() {
-    // later this needs to check if it's p1 or p2
-    const URL = this.isPlayer1 ? "aiModels/p1/model.json" : "aiModels/p2/model.json"
+    const URL = "aiModels/new/model.json";
     this.model = await tf.loadLayersModel(URL);
-  }
-
-  _invertBoard(board) {
-    for (let row = 0; row < board.length; row++) {
-      for (let col = 0; col < board[0].length; col++) {
-        board[row][col] *= -1;
-      }
-    }
   }
 
   _getPrediction(board) {
@@ -88,7 +80,7 @@ class CPUController {
           continue;
         }
         const boardCopy = this._copyBoard(board);
-        boardCopy[mask[i]][i] = 1;
+        boardCopy[mask[i]][i][0] = 1;
         const tensorBoard = this._prepareForPrediction(boardCopy);
         mask[i] = this.model.predict(tensorBoard).dataSync()[0];
       }
@@ -105,7 +97,7 @@ class CPUController {
 
     for (let col = 0; col < board[0].length; col++) {
       for (let row = 0; row < board.length; row++) {
-        if (board[row][col] === 0) {
+        if (board[row][col][0] === 0 && board[row][col][1] === 0) {
           mask[col] = row;
         } else {
           break;
@@ -131,15 +123,15 @@ class CPUController {
   }
 
   _prepareForPrediction(board) {
-    // the original board shape is (6, 7), but
-    // to run predictions it needs to be (1, 6, 7, 1)
+    // the original board shape is (6, 7, 2), but
+    // to run predictions it needs to be (1, 6, 7, 2)
     // (the first dimension is the batch size)
 
     return tf.tidy(() => {
-      const boardTensor2D = tf.tensor2d(board);
-      const boardTensor3D = boardTensor2D.expandDims(2).expandDims(0);
+      const boardTensor3D = tf.tensor3d(board);
+      const boardTensor4D = boardTensor3D.expandDims(0);
 
-      return boardTensor3D;
+      return boardTensor4D;
     });
   }
 }

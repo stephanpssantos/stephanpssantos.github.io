@@ -10,19 +10,20 @@ class Board {
     this.turnLimit = GAME_CONFIG.TURN_LIMIT;
 
     this.board = null;
+    this.invertedBoard = null;
   }
 
   getBoard() {
     return this.board;
   }
 
-  newBoard() {
-    const height = this.boardHeight;
-    const width = this.boardWidth;
+  getInvertedBoard() {
+    return this.invertedBoard;
+  }
 
-    this.board = new Array(height)
-      .fill(0)
-      .map((x) => (x = new Array(width).fill(0)));
+  newBoard() {
+    this.board = this._makeNewBoard();
+    this.invertedBoard = this._makeNewBoard();
   }
 
   makeMove(move) {
@@ -31,8 +32,10 @@ class Board {
     if (!isValid) return Update.rejectMove(move);
 
     // place piece
-    const newPiece = move.isPlayer1 ? 1 : -1;
-    this.board[move.row][move.col] = newPiece;
+    const p1 = move.isPlayer1 ? 0 : 1;
+    const p2 = move.isPlayer1 ? 1 : 0;
+    this.board[move.row][move.col][p1] = 1;
+    this.invertedBoard[move.row][move.col][p2] = 1;
 
     // winner
     const winner = this._checkWinner(move);
@@ -45,16 +48,33 @@ class Board {
     return Update.newMove(move);
   }
 
+  _makeNewBoard() {
+    const height = this.boardHeight;
+    const width = this.boardWidth;
+
+    let board = new Array(height)
+      .fill(0)
+      .map((x) => (x = new Array(width)
+      .fill(0)
+      .map((y) => y = new Array(2)
+      .fill(0))
+    ));
+
+    return board;
+  }
+
   _validateMove(move) {
     if (this.game.status !== GAME_STATUS.ACTIVE) return false;
     if (move.isPlayer1 !== this.game.p1Turn) return false;
     if (move.row < 0 || move.col < 0) return false;
     if (move.row >= this.boardHeight) return false;
     if (move.col >= this.boardWidth) return false;
-    if (this.board[move.row][move.col] !== 0) return false;
+    if (this.board[move.row][move.col][0] !== 0 || 
+      this.board[move.row][move.col][1] !== 0) return false;
 
     for (let r = move.row + 1; r < this.boardHeight; r++) {
-      if (this.board[r][move.col] === 0) {
+      if (this.board[r][move.col][0] === 0 && 
+        this.board[r][move.col][1] === 0) {
         return false;
       }
     }
@@ -63,7 +83,7 @@ class Board {
   }
 
   _checkWinner(move) {
-    const player = move.isPlayer1 ? 1 : -1;
+    const player = move.isPlayer1 ? 0 : 1;
     const board = this.board;
 
     function goDirection(row, col, direction, count) {
@@ -82,7 +102,7 @@ class Board {
 
       const nextPosition = board[row] ? board[row][col] : null;
 
-      if (!nextPosition || nextPosition !== player) return count;
+      if (!nextPosition || nextPosition[player] !== 1) return count;
       else return goDirection(row, col, direction, ++count);
     }
 
