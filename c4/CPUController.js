@@ -66,7 +66,7 @@ class CPUController {
   }
 
   async _loadModel() {
-    const URL = "aiModels/new/model.json";
+    const URL = this.isPlayer1 ? "aiModels/p1/model.json" : "aiModels/p2/model.json"
     this.model = await tf.loadLayersModel(URL);
   }
 
